@@ -3,6 +3,8 @@ DROP DATABASE krautundrueben;
 CREATE DATABASE krautundrueben CHARACTER SET utf8;
 USE krautundrueben;
 
+# Create tables
+
 CREATE TABLE kunde (
 	KdNr INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	Vorname VARCHAR(50),
@@ -63,6 +65,8 @@ CREATE TABLE kategorie (
 	KatName VARCHAR(50)
 );
 
+# Create join tables for many-to-many relationships
+
 CREATE TABLE zutatinbestellung (
 	Menge FLOAT,
 	BestellNr INT,
@@ -104,6 +108,8 @@ CREATE TABLE kategoriefuerrezept (
 	FOREIGN KEY (RezeptNr) REFERENCES Rezept(RezeptNr),
 	PRIMARY KEY (KatNr, RezeptNr)
 );
+
+# Implement remaining relationships by altering the tables to hold the foreign key
 
 ALTER TABLE bestellung ADD COLUMN KdNr INT, ADD CONSTRAINT FK_KdNr FOREIGN KEY (KdNr) REFERENCES Kunde(KdNr);
 ALTER TABLE zutat ADD COLUMN LiefNr INT, ADD CONSTRAINT FK_LiefNr FOREIGN KEY (LiefNr) REFERENCES Lieferant(LiefNr);
