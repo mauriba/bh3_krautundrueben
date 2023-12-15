@@ -51,15 +51,7 @@ CREATE TABLE beschraenkung (
 
 CREATE TABLE rezept (
 	RezeptNr INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	Name VARCHAR(50),
-	Kalorien FLOAT,
-	Proteine FLOAT,
-	Kohlenhydrate FLOAT,
-	Zucker FLOAT,
-	Fett FLOAT,
-	FettGesaettigt FLOAT,
-	Ballaststoffe FLOAT,
-	Natrium FLOAT
+	RezeptName VARCHAR(50)
 );
 
 CREATE TABLE kategorie (
@@ -77,10 +69,10 @@ CREATE TABLE zutatinbestellung (
 );
 
 CREATE TABLE zutatbeschraenkung (
-	BeschNr INT,
 	ZutatNr INT,
-	FOREIGN KEY (BeschNr) REFERENCES Beschraenkung(BeschNr),
+	BeschNr INT,
 	FOREIGN KEY (ZutatNR) REFERENCES Zutat(ZutatNr),
+	FOREIGN KEY (BeschNr) REFERENCES Beschraenkung(BeschNr),
 	PRIMARY KEY (BeschNr, ZutatNr)
 );
 
