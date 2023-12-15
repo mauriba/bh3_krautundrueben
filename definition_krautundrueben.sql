@@ -3,43 +3,45 @@ DROP DATABASE krautundrueben;
 CREATE DATABASE krautundrueben CHARACTER SET utf8;
 USE krautundrueben;
 
-# Create tables
-
 CREATE TABLE kunde (
 	KdNr INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	Vorname VARCHAR(50),
-	Name VARCHAR(50),
-	Strasse VARCHAR(50),
+	Nachname VARCHAR(50),
 	Geburtsdatum DATE,
-	HausNr INT,
+	Strasse VARCHAR(50),
+	HausNr VARCHAR(10),
 	PLZ VARCHAR(10),
-	Stadt VARCHAR(50)
+	Ort VARCHAR(50),
+	Telefon VARCHAR(20),
+	Email VARCHAR(50)
 );
 
 CREATE TABLE lieferant (
 	LiefNr INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	Stadt VARCHAR(50),
+	Ort VARCHAR(50),
 	Strasse VARCHAR(50),
-	Name VARCHAR(50),
+	LiefName VARCHAR(50),
 	PLZ VARCHAR(10),
-	HausNr INT
+	HausNr VARCHAR(10),
+	Telefon VARCHAR(20),
+	Email VARCHAR(50)
 );
 
 CREATE TABLE bestellung (
 	BestellNr INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	Gesamtpreis INT,
-	Datum DATE
+	Bestelldatum DATE
 );
 
 CREATE TABLE zutat (
 	ZutatNr INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	ZutatName VARCHAR(50),
-	Bestand FLOAT,
+	Einheit VARCHAR(10),
 	Nettopreis FLOAT,
-	Mengeneinheit INT,
-	KohlenhydrateProEinheit FLOAT,
-	KalorienProEinheit INT,
-	FettProEinheit INT
+	Bestand INT,
+	Kalorien INT,
+	Kohlenhydrate FLOAT,
+	Proteine INT
 );
 
 CREATE TABLE beschraenkung (
@@ -64,8 +66,6 @@ CREATE TABLE kategorie (
 	KatNr INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	KatName VARCHAR(50)
 );
-
-# Create join tables for many-to-many relationships
 
 CREATE TABLE zutatinbestellung (
 	Menge FLOAT,
@@ -108,8 +108,6 @@ CREATE TABLE kategoriefuerrezept (
 	FOREIGN KEY (RezeptNr) REFERENCES Rezept(RezeptNr),
 	PRIMARY KEY (KatNr, RezeptNr)
 );
-
-# Implement remaining relationships by altering the tables to hold the foreign key
 
 ALTER TABLE bestellung ADD COLUMN KdNr INT, ADD CONSTRAINT FK_KdNr FOREIGN KEY (KdNr) REFERENCES Kunde(KdNr);
 ALTER TABLE zutat ADD COLUMN LiefNr INT, ADD CONSTRAINT FK_LiefNr FOREIGN KEY (LiefNr) REFERENCES Lieferant(LiefNr);
