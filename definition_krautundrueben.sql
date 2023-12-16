@@ -36,7 +36,7 @@ CREATE TABLE zutat (
 	ZutatName VARCHAR(50),
 	Einheit VARCHAR(10),
 	Nettopreis FLOAT,
-	Bestand INT,
+	Bestand FLOAT,
 	Kalorien INT,
 	Kohlenhydrate FLOAT,
 	Proteine FLOAT
