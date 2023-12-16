@@ -1,5 +1,3 @@
-# Dump old database, create new one
-DROP DATABASE krautundrueben;
 CREATE DATABASE krautundrueben CHARACTER SET utf8;
 USE krautundrueben;
 
@@ -29,7 +27,7 @@ CREATE TABLE lieferant (
 
 CREATE TABLE bestellung (
 	BestellNr INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	Gesamtpreis INT,
+	Gesamtpreis FLOAT,
 	Bestelldatum DATE
 );
 
@@ -41,7 +39,7 @@ CREATE TABLE zutat (
 	Bestand INT,
 	Kalorien INT,
 	Kohlenhydrate FLOAT,
-	Proteine INT
+	Proteine FLOAT
 );
 
 CREATE TABLE beschraenkung (
