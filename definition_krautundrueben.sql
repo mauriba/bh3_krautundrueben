@@ -61,24 +61,24 @@ CREATE TABLE zutatinbestellung (
 	Menge FLOAT,
 	BestellNr INT,
 	ZutatNr INT,
-   FOREIGN KEY (BestellNr) REFERENCES Bestellung(BestellNr),
-   FOREIGN KEY (ZutatNr) REFERENCES Zutat(ZutatNr),
+   FOREIGN KEY (BestellNr) REFERENCES bestellung(BestellNr),
+   FOREIGN KEY (ZutatNr) REFERENCES zutat(ZutatNr),
    PRIMARY KEY (BestellNr, ZutatNr)
 );
 
 CREATE TABLE zutatbeschraenkung (
 	ZutatNr INT,
 	BeschNr INT,
-	FOREIGN KEY (ZutatNR) REFERENCES Zutat(ZutatNr),
-	FOREIGN KEY (BeschNr) REFERENCES Beschraenkung(BeschNr),
+	FOREIGN KEY (ZutatNR) REFERENCES zutat(ZutatNr),
+	FOREIGN KEY (BeschNr) REFERENCES beschraenkung(BeschNr),
 	PRIMARY KEY (BeschNr, ZutatNr)
 );
 
 CREATE TABLE kundenbeschraenkung (
 	BeschNr INT,
 	KdNr INT,
-	FOREIGN KEY (BeschNr) REFERENCES Beschraenkung(BeschNr),
-	FOREIGN KEY (KdNr) REFERENCES Kunde(KdNr),
+	FOREIGN KEY (BeschNr) REFERENCES beschraenkung(BeschNr),
+	FOREIGN KEY (KdNr) REFERENCES kunde(KdNr),
 	PRIMARY KEY (BeschNr, KdNr)
 );
 
@@ -86,18 +86,18 @@ CREATE TABLE zutatinrezept (
 	Menge FLOAT,
 	RezeptNr INT,
 	ZutatNr INT,
-   FOREIGN KEY (RezeptNr) REFERENCES Rezept(RezeptNr),
-   FOREIGN KEY (ZutatNr) REFERENCES Zutat(ZutatNr),
+   FOREIGN KEY (RezeptNr) REFERENCES rezept(RezeptNr),
+   FOREIGN KEY (ZutatNr) REFERENCES zutat(ZutatNr),
    PRIMARY KEY (RezeptNr, ZutatNr)
 );
 
 CREATE TABLE kategoriefuerrezept (
 	KatNr INT,
 	RezeptNr INT,
-	FOREIGN KEY (KatNr) REFERENCES Kategorie(KatNR),
-	FOREIGN KEY (RezeptNr) REFERENCES Rezept(RezeptNr),
+	FOREIGN KEY (KatNr) REFERENCES kategorie(KatNR),
+	FOREIGN KEY (RezeptNr) REFERENCES rezept(RezeptNr),
 	PRIMARY KEY (KatNr, RezeptNr)
 );
 
-ALTER TABLE bestellung ADD COLUMN KdNr INT, ADD CONSTRAINT FK_KdNr FOREIGN KEY (KdNr) REFERENCES Kunde(KdNr);
-ALTER TABLE zutat ADD COLUMN LiefNr INT, ADD CONSTRAINT FK_LiefNr FOREIGN KEY (LiefNr) REFERENCES Lieferant(LiefNr);
+ALTER TABLE bestellung ADD COLUMN KdNr INT, ADD CONSTRAINT FK_KdNr FOREIGN KEY (KdNr) REFERENCES kunde(KdNr);
+ALTER TABLE zutat ADD COLUMN LiefNr INT, ADD CONSTRAINT FK_LiefNr FOREIGN KEY (LiefNr) REFERENCES lieferant(LiefNr);
